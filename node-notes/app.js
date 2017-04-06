@@ -1,21 +1,32 @@
 const fs = require('fs');
-const os = require('os');
+const _ = require('lodash');
+const yargs = require('yargs');
+
 const notes = require('./notes.js');
 
-let user = os.userInfo();
+const argv = yargs.argv;
 
-let greeting = "Hello to all my friends and enemies";
+// console.log('Process', process.argv);
+// console.log('Yargs', argv);
 
-let res = notes.addNote();
-// console.log(res);
 
-console.log(notes.add(5,5));
+var command = process.argv[2];
 
-// console.log(user);
-// fs.appendFileSync('user-info.txt', `Hello ${user.username}! You are ${notes.age} years old.`);
+if(command === 'add') {
+	console.log('Adding new note');
+	notes.addNote(argv.title, argv.body);
 
-// fs.appendFile('greetings.txt', greeting, function(err){
-// 	if(err) {
-// 		console.log(err);
-// 	}
-// });
+} else if ( command === 'read') {
+	console.log('Reading note');
+
+} else if ( command === 'remove' ) {
+	console.log('Removing note');
+
+} else if (command === 'list') {
+	console.log('Listing all notes');
+
+} else {
+	console.log('Command not recognized');
+}
+
+// node app.js add --title=JLab --body="Hello from Bangkok"
