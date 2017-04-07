@@ -10,20 +10,20 @@ const argv = yargs.argv;
 // console.log('Yargs', argv);
 
 
-var command = process.argv[2];
+// var command = process.argv[2];
+let command = argv._[0];
 
 if(command === 'add') {
-	console.log('Adding new note');
 	notes.addNote(argv.title, argv.body);
 
 } else if ( command === 'read') {
-	console.log('Reading note');
+	notes.getNote(argv.title);
 
 } else if ( command === 'remove' ) {
-	console.log('Removing note');
+	notes.removeNote(argv.title);
 
 } else if (command === 'list') {
-	console.log('Listing all notes');
+	notes.getAll();
 
 } else {
 	console.log('Command not recognized');
