@@ -1,33 +1,46 @@
 const fs = require('fs');
 
+let fetchNotes = () => {
+	try {
+		let notesString = fs.readFileSync('notes-data.json');
+		return JSON.parse(notesString);
+	} catch (err) {
+		// console.log(err);
+		return [];
+	}
+};
+
+let saveNotes = (notes) => {
+	fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+};
+
 let addNote = (title, body) => {
-	let notes = [];
+	let notes = fetchNotes();
 	let note = {
 		title,
 		body
 	};
 
-	try {
-		let notesString = fs.readFileSync('notes-data.json');
-		notes = JSON.parse(notesString);
-	} catch (err) {
-		// console.log(err);
-	}
-
 	let duplicateNotes = notes.filter((note) => note.title === title);
 	
 	if(duplicateNotes.length === 0) {
 		notes.push(note);
-		fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+		saveNotes(notes);
+		return note
 	}
-	
+	//if nothing is returned (no return statement) then UNDEFINDED is returned
 }
+
 let getNote = (title) => {
 	console.log(title);
 }
 
 let removeNote = (title) => {
-	console.log(title);
+	let notes = fetchNotes();
+	let filteredNotes = notes.filter((note) => note.title !== title) 
+	saveNotes(filteredNotes);
+
+	return notes.length !== filteredNotes.length;
 }
 
 let getAll = () => {
