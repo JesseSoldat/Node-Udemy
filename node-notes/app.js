@@ -9,7 +9,6 @@ const argv = yargs.argv;
 // console.log('Process', process.argv);
 // console.log('Yargs', argv);
 
-
 // var command = process.argv[2];
 let command = argv._[0];
 
@@ -25,8 +24,15 @@ if(command === 'add') {
 	}
 
 } else if ( command === 'read') {
-	notes.getNote(argv.title);
-
+	let note = notes.getNote(argv.title);
+	if(note) {
+		console.log('Note Found');
+		console.log('------------');
+		console.log(`Title: ${note.title}`);
+		console.log(`Body: ${note.body}`);
+	} else {
+		console.log('Note not found');
+	}
 
 } else if ( command === 'remove' ) {
 	let noteRemoved = notes.removeNote(argv.title);
