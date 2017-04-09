@@ -22,8 +22,10 @@ let geocodeAddress = (argvAddress, callback) => {
 		} else if (body.status === 'OK') {
 			callback(undefined, {
 				address: `Address: ${body.results[0].formatted_address}`,
-				lat: `Lat: ${body.results[0].geometry.location.lat}`,
-				lng: `Lng: ${body.results[0].geometry.location.lng}`
+				// lat: `Lat: ${body.results[0].geometry.location.lat}`,
+				// lng: `Lng: ${body.results[0].geometry.location.lng}`,
+				lat: body.results[0].geometry.location.lat,
+				lng: body.results[0].geometry.location.lng,		
 			});
 			// console.log(`Address: ${body.results[0].formatted_address}`);
 			// console.log(`Lat: ${body.results[0].geometry.location.lat}`);
