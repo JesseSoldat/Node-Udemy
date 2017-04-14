@@ -1,4 +1,4 @@
-const request = require('request');
+const request = require('request'); 
 
 let geocodeAddress = (argvAddress, callback) => {
 
@@ -21,7 +21,7 @@ let geocodeAddress = (argvAddress, callback) => {
 			// console.log('Unable to find that address');
 		} else if (body.status === 'OK') {
 			callback(undefined, {
-				address: `Address: ${body.results[0].formatted_address}`,
+				address: body.results[0].formatted_address,
 				// lat: `Lat: ${body.results[0].geometry.location.lat}`,
 				// lng: `Lng: ${body.results[0].geometry.location.lng}`,
 				lat: body.results[0].geometry.location.lat,
