@@ -5,7 +5,7 @@ let app = require('./server').app;
 
 describe('Server', () => {
 	describe('GET /', () => {
-		it('should return hello world response', (done) => {
+		it('should return a 404 error', (done) => {
 			request(app)
 				.get('/')
 				.expect(404)
